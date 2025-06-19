@@ -3,7 +3,8 @@ class SharpeGame {
         this.chart = null;
         this.returns = [];
         this.cumulativeReturns = [];
-        this.currentSharpe = 0;
+        this.currentSharpe = 0; // sample Sharpe
+        this.targetSharpe = 0;  // population Sharpe used for simulation
         
         this.setupEventListeners();
         this.initializeChart();
@@ -26,8 +27,8 @@ class SharpeGame {
             data: {
                 datasets: [{
                     data: [],
-                    borderColor: 'rgba(0, 0, 0, 0.5)',
-                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    borderColor: '#0f0',
+                    backgroundColor: 'rgba(0, 255, 0, 0.2)',
                     borderWidth: 1,
                     pointRadius: 0,
                     fill: true
@@ -46,19 +47,25 @@ class SharpeGame {
                         type: 'linear',
                         position: 'bottom',
                         min: 0,
-                        max: 1,
+                        max: 2,
                         grid: {
-                            display: true
+                            color: '#0f0',
+                            display: true,
+                            lineWidth: 0.2
                         },
                         ticks: {
+                            color: '#0f0',
                             maxTicksLimit: 10
                         }
                     },
                     y: {
                         grid: {
-                            display: true
+                            color: '#0f0',
+                            display: true,
+                            lineWidth: 0.2
                         },
                         ticks: {
+                            color: '#0f0',
                             maxTicksLimit: 8,
                             callback: function(value) {
                                 return (value * 100).toFixed(0) + '%';
@@ -79,6 +86,7 @@ class SharpeGame {
         this.cumulativeReturns = [];
         
         const targetSharpe = (Math.random() * 6) - 3;
+        this.targetSharpe = targetSharpe; // store population Sharpe
         const annualizedVolatility = 0.15;
         const dailyVolatility = annualizedVolatility / Math.sqrt(252);
         const dailyReturn = (targetSharpe * annualizedVolatility) / 252;
@@ -107,7 +115,7 @@ class SharpeGame {
 
     updateChart() {
         const points = this.cumulativeReturns.map((r, i) => ({
-            x: i / this.returns.length,
+            x: 2 * i / this.returns.length,
             y: r - 1
         }));
 
@@ -117,11 +125,14 @@ class SharpeGame {
 
     checkGuess() {
         const guessedValue = +document.getElementById('sharpeGuess').value;
-        const difference = Math.abs(this.currentSharpe - guessedValue);
+        const diffSample = Math.abs(this.currentSharpe - guessedValue);
+        const diffPop = Math.abs(this.targetSharpe - guessedValue);
         
-        document.getElementById('trueSharpe').textContent = this.currentSharpe.toFixed(2);
+        document.getElementById('sampleSharpe').textContent = this.currentSharpe.toFixed(2);
+        document.getElementById('popSharpe').textContent = this.targetSharpe.toFixed(2);
         document.getElementById('guessedSharpe').textContent = guessedValue.toFixed(2);
-        document.getElementById('difference').textContent = difference.toFixed(2);
+        document.getElementById('diffSample').textContent = diffSample.toFixed(2);
+        document.getElementById('diffPop').textContent = diffPop.toFixed(2);
         
         document.querySelector('.results').style.display = 'flex';
         document.getElementById('submitGuess').style.display = 'none';

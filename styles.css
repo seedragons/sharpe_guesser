@@ -7,28 +7,37 @@
 }
 
 body {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #f0f0f0;
+    font-family: 'Press Start 2P', monospace;
+    background-color: #000;
+    color: #0f0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
 }
 
+.main-title {
+    color: #0f0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+    text-shadow: 0 0 5px #0f0;
+}
+
 .game-container {
-    background-color: white;
+    background-color: #000;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 2px solid #0f0;
     max-width: 800px;
     width: 100%;
 }
 
 .game-area {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
+    background-color: #000;
+    padding: 10px;
+    border: 1px dashed #0f0;
 }
 
 .chart-container {
@@ -36,6 +45,7 @@ body {
     height: 400px;
     width: 100%;
     margin-bottom: 20px;
+    border: 1px solid #0f0;
 }
 
 #returnsChart {
@@ -53,25 +63,31 @@ input[type="range"] {
     margin: 10px 0;
 }
 
+input[type="range"].styled-slider::-webkit-slider-thumb {
+    background: #0f0;
+}
+
 .guess-value {
     font-size: 14px;
     margin: 10px 0;
 }
 
 button {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    font-family: 'Press Start 2P', monospace;
+    background-color: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 10px 0;
+    text-shadow: 0 0 4px #0f0;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0f0;
+    color: #000;
 }
 
 .results {
@@ -87,6 +103,7 @@ button:hover {
     align-items: center;
     font-size: 12px;
     padding: 5px 0;
+    border-bottom: 1px dotted #0f0;
 }
 
 .stats-bar {

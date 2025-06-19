@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1 class="main-title">Guess the Sharpe!</h1>
     <div class="game-container">
         <div class="game-area">
             <div class="chart-container">
@@ -22,9 +23,11 @@
             </div>
 
             <div class="results" style="display: none;">
-                <div class="result-item">TRUE SHARPE<span id="trueSharpe">0.00</span></div>
+                <div class="result-item">SAMPLE SHARPE<span id="sampleSharpe">0.00</span></div>
+                <div class="result-item">POPULATION SHARPE<span id="popSharpe">0.00</span></div>
                 <div class="result-item">YOUR GUESS<span id="guessedSharpe">0.00</span></div>
-                <div class="result-item">DIFFERENCE<span id="difference">0.00</span></div>
+                <div class="result-item">DIFF VS SAMPLE<span id="diffSample">0.00</span></div>
+                <div class="result-item">DIFF VS POP<span id="diffPop">0.00</span></div>
                 <button id="nextRound">NEXT ROUND</button>
             </div>
         </div>
